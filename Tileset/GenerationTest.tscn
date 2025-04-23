@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://wahibi3sxhqj"]
+
+[ext_resource type="TileSet" uid="uid://dkne1v4t86qco" path="res://Tileset/new_tile_set.tres" id="1_wdkkl"]
+[ext_resource type="Script" uid="uid://bwfkuoub6uh5i" path="res://Floor.cs" id="2_0gi7l"]
+[ext_resource type="Script" uid="uid://b55xbeg2w7gph" path="res://Tileset/Wall.cs" id="3_0gi7l"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Floor" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_wdkkl")
+script = ExtResource("2_0gi7l")
+
+[node name="Wall" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_wdkkl")
+script = ExtResource("3_0gi7l")
