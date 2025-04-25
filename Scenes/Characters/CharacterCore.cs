@@ -56,13 +56,13 @@ public partial class CharacterCore : Area2D
 	{
 		//Character Cords are 24* the size of a regular tile internally.
 		Vector2 newPos = new Vector2((int)pos.X / tile_size, (int)pos.Y / tile_size);
-        TileData data = floorData.GetCellTileData((Vector2I)newPos);
+		TileData data = floorData.GetCellTileData((Vector2I)newPos);
 
-        //Debug Print Statements to see if it worked.
-        //GD.Print(newPos);
+		//Debug Print Statements to see if it worked.
+		//GD.Print(newPos);
 		//GD.Print(data);
 
-        if ((bool)data.HasCustomData("Stair")){
+		if ((bool)data.HasCustomData("Stair")){
 			if ((bool)data.GetCustomData("Stair"))
 			{
 				GD.Print("Found the Stairs!");
