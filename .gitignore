@@ -1,3 +1,13 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+.vs/
+*.v2
+.vs/PMD-Godot/DesignTimeBuild/.dtbcache.v2
+.vs/PMD-Godot/FileContentIndex/32d33dd8-5227-478c-8129-645f418eb658.vsidx
+.vs/PMD-Godot/FileContentIndex/339e96de-d42a-4d72-b50b-d223ae0c2492.vsidx
+.vs/PMD-Godot/FileContentIndex/731c7378-6975-4da9-aba4-076c2885ff52.vsidx
+.vs/PMD-Godot/FileContentIndex/c393bce6-7c46-4f40-8368-2f2ca0c9d168.vsidx
+.vs/ProjectEvaluation/pmd-godot.metadata.v9.bin
+.vs/ProjectEvaluation/pmd-godot.projects.v9.bin
+.vs/ProjectEvaluation/pmd-godot.strings.v9.bin

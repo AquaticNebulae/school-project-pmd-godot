@@ -12,6 +12,9 @@ public partial class CharacterCore : Area2D
 	[Export]
 	public RayCast2D rayCast;
 
+
+	[Export]
+	public TileMapLayer floorData;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -32,6 +35,7 @@ public partial class CharacterCore : Area2D
 		{
 			if(@event.IsActionPressed(input)){
 				move(input);
+				OnStairs(Position);
 			}
 		}
 
@@ -44,6 +48,29 @@ public partial class CharacterCore : Area2D
 		rayCast.ForceRaycastUpdate();
 		if(!rayCast.IsColliding())
 			Position += inputs[input] * tile_size;
+		
+	}
+
+
+	private bool OnStairs(Vector2 pos)
+	{
+		//Character Cords are 24* the size of a regular tile internally.
+		Vector2 newPos = new Vector2((int)pos.X / tile_size, (int)pos.Y / tile_size);
+        TileData data = floorData.GetCellTileData((Vector2I)newPos);
+
+        //Debug Print Statements to see if it worked.
+        //GD.Print(newPos);
+		//GD.Print(data);
+
+        if ((bool)data.HasCustomData("Stair")){
+			if ((bool)data.GetCustomData("Stair"))
+			{
+				GD.Print("Found the Stairs!");
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

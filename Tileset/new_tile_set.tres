@@ -43,6 +43,7 @@ texture_region_size = Vector2i(24, 24)
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
 6:1/0 = 0
 7:1/0 = 0
+7:1/0/custom_data_0 = true
 8:1/0 = 0
 9:1/0 = 0
 10:1/0 = 0
@@ -201,4 +202,6 @@ texture_region_size = Vector2i(24, 24)
 [resource]
 tile_size = Vector2i(24, 24)
 physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "Stair"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_eo1rd")

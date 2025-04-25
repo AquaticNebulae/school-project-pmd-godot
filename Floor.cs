@@ -43,6 +43,10 @@ public partial class Floor : TileMapLayer
 				SetCell(pos,0,map,0);
 			}
 		}
+
+		//Warp Tile
+		SetCell(new Vector2I(23, 25), 0, new Vector2I(7, 1), 0);
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
