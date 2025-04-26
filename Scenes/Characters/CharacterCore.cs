@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Text.RegularExpressions;
 
 public partial class CharacterCore : Area2D
 {
@@ -12,6 +13,8 @@ public partial class CharacterCore : Area2D
 	[Export]
 	public RayCast2D rayCast;
 
+	[Export]
+	public AnimatedSprite2D animatedSprite;
 
 	[Export]
 	public TileMapLayer floorData;
@@ -19,6 +22,9 @@ public partial class CharacterCore : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
+		animatedSprite.Play("idle_down");
+
 		inputs.Add("move_right", Vector2.Right);
 		inputs.Add("move_left", Vector2.Left);
 		inputs.Add("move_up", Vector2.Up);
@@ -35,7 +41,7 @@ public partial class CharacterCore : Area2D
 		{
 			if(@event.IsActionPressed(input)){
 				move(input);
-				OnStairs(Position);
+				
 			}
 		}
 
@@ -44,6 +50,23 @@ public partial class CharacterCore : Area2D
 
 	private void move(string input)
 	{
+		switch (input)
+		{
+			case "move_right":
+				animatedSprite.Play("idle_right");
+				break;
+			case "move_left":
+				animatedSprite.Play("idle_left");
+				break;
+			case "move_up":
+				animatedSprite.Play("idle_up");
+				break;
+			case "move_down":
+				animatedSprite.Play("idle_down");
+				break;
+		}
+
+
 		rayCast.TargetPosition = inputs[input] * tile_size;
 		rayCast.ForceRaycastUpdate();
 		if(!rayCast.IsColliding())

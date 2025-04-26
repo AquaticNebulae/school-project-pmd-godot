@@ -1,14 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0pbthmkojd4m"]
+[gd_scene load_steps=4 format=3 uid="uid://d0pbthmkojd4m"]
 
+[ext_resource type="Script" uid="uid://dcjnw2w8sdj5r" path="res://Scenes/DungeonMain.cs" id="1_cnowq"]
 [ext_resource type="PackedScene" uid="uid://wahibi3sxhqj" path="res://Tileset/GenerationTest.tscn" id="2_y3u3u"]
 [ext_resource type="PackedScene" uid="uid://dn2thw31npxij" path="res://Scenes/Characters/characterCore.tscn" id="3_cnowq"]
 
 [node name="DungeonMain" type="Node"]
+script = ExtResource("1_cnowq")
 
 [node name="Dungeon" parent="." instance=ExtResource("2_y3u3u")]
 
 [node name="Character" parent="." node_paths=PackedStringArray("floorData") instance=ExtResource("3_cnowq")]
-position = Vector2(81, 74)
+position = Vector2(120, 120)
 floorData = NodePath("../Dungeon/Floor")
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
 
 [editable path="Dungeon"]
