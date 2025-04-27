@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\ctjac\\Documents\\pmd-godot\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\scenes\\characters\\charactercore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:scenes\\characters\\charactercore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\scenes\\dungeonmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:scenes\\dungeonmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\floor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:floor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\scenes\\characters\\charactercore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:scenes\\characters\\charactercore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\tileset\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:tileset\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,30 +26,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "Wall.cs",
+              "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Tileset\\Wall.cs",
+              "RelativeDocumentMoniker": "Tileset\\Wall.cs",
+              "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Tileset\\Wall.cs",
+              "RelativeToolTip": "Tileset\\Wall.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T15:04:32.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DungeonMain.cs",
+              "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\DungeonMain.cs",
+              "RelativeDocumentMoniker": "Scenes\\DungeonMain.cs",
+              "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\DungeonMain.cs",
+              "RelativeToolTip": "Scenes\\DungeonMain.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowDQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T15:02:41.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Floor.cs",
               "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Floor.cs",
               "RelativeDocumentMoniker": "Floor.cs",
               "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Floor.cs",
               "RelativeToolTip": "Floor.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwCsAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwCsAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T21:43:10.199Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "CharacterCore.cs",
               "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\Characters\\CharacterCore.cs",
               "RelativeDocumentMoniker": "Scenes\\Characters\\CharacterCore.cs",
               "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\Characters\\CharacterCore.cs",
               "RelativeToolTip": "Scenes\\Characters\\CharacterCore.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowCkAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAowD8AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-21T15:58:56.051Z",
               "EditorCaption": ""

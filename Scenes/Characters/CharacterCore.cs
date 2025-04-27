@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 using System.Text.RegularExpressions;
 
-public partial class CharacterCore : Area2D
+public partial class CharacterCore : CharacterBody2D
 {
 	[Export]
 	public int tile_size = 24;
@@ -18,11 +18,14 @@ public partial class CharacterCore : Area2D
 
 	[Export]
 	public TileMapLayer floorData;
-	
+
+	[Signal]
+	public delegate void PlayerActionEventHandler();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		
 		animatedSprite.Play("idle_down");
 
 		inputs.Add("move_right", Vector2.Right);
@@ -41,7 +44,7 @@ public partial class CharacterCore : Area2D
 		{
 			if(@event.IsActionPressed(input)){
 				move(input);
-				
+				EmitSignal(SignalName.PlayerAction);
 			}
 		}
 

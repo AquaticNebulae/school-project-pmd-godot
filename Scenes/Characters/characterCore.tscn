@@ -234,7 +234,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_junic"]
 size = Vector2(16, 16)
 
-[node name="Character" type="Area2D" node_paths=PackedStringArray("rayCast", "animatedSprite")]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "animatedSprite")]
 script = ExtResource("1_eav0p")
 rayCast = NodePath("RayCast2D")
 animatedSprite = NodePath("AnimatedSprite2D")
