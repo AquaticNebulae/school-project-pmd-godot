@@ -8,7 +8,14 @@ public partial class CharacterCore : CharacterBody2D
 	[Export]
 	public int tile_size = 24;
 	public Dictionary<string,Vector2> inputs = new Dictionary<string, Vector2>();
-	
+
+	[Export]
+	public int baseHP = 100;
+	[Export]
+	public int baseATK = 50;
+	[Export]
+	public int baseDEF = 10;
+
 
 	[Export]
 	public RayCast2D rayCast;
@@ -21,6 +28,9 @@ public partial class CharacterCore : CharacterBody2D
 
 	[Signal]
 	public delegate void PlayerActionEventHandler();
+
+	[Signal]
+	public delegate void PlayerAttackEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -47,8 +57,27 @@ public partial class CharacterCore : CharacterBody2D
 				EmitSignal(SignalName.PlayerAction);
 			}
 		}
+		if (@event.IsActionPressed("active_action"))
+		{
+			Attack();
+			EmitSignal(SignalName.PlayerAction);
+		}
+
+	}
+
+	private void Attack()
+	{
+		if (!rayCast.IsColliding())
+		{
+			GD.Print("The Attack Failed!");
+		}
+		else
+		{
+			//Play Attack Sprite Here
 
 
+			EmitSignal(SignalName.PlayerAttack);
+		}
 	}
 
 	private void move(string input)

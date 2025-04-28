@@ -10,6 +10,12 @@ public partial class Enemy : CharacterBody2D
 	[Export]
 	public int MoveTurn = 2;
 
+	[Export]
+	public int baseHP = 100;
+	[Export]
+	public int baseATK = 10;
+	[Export]
+	public int baseDEF = 5;
 
 
 	[Export]
@@ -26,10 +32,26 @@ public partial class Enemy : CharacterBody2D
 	List<Vector2> PathtoPlayer;
 	int turnCounter = 1;
 
+	public Enemy()
+	{
+
+	}
+	public static Enemy NewEnemy(TileMapLayer tml, CharacterBody2D p, AnimatedSprite2D sp)
+	{
+		Enemy enemy = new Enemy();
+
+		enemy.tileMapLayer = tml;
+		enemy.player = p;
+		enemy.animatedSprite = sp;
+		return enemy;
+	}
+
 	public override void _Ready()
 	{
-		visualPath.GlobalPosition = new Vector2((float)tileSize / (float)2.0, (float)tileSize / (float)2.0);
+		//visualPath.GlobalPosition = new Vector2((float)tileSize / (float)2.0, (float)tileSize / (float)2.0);
 
+
+		//player.Connect("PlayerAttack", new Callable(this, nameof(GetHitIdiot)));
 		player.Connect("PlayerAction", new Callable(this, nameof(_moveAi)));
 
 		pathFinder.Region = tileMapLayer.GetUsedRect();
@@ -45,10 +67,25 @@ public partial class Enemy : CharacterBody2D
 		_moveAi();
 	}
 
+	private void GetHitIdiot()
+	{
+		int damage = ((int)player.Get("baseATK") - baseDEF);
+		GD.Print(damage);
+		if (damage > 0)
+		{
+			
+			baseHP -= damage;
+			if(baseHP < 0)
+			{
+				this.QueueFree();
+			}
+		}
+	}
+
 	private void _moveAi()
 	{
 		PathtoPlayer = pathFinder.GetPointPath((Vector2I) GlobalPosition / tileSize, (Vector2I) player.GlobalPosition / tileSize).ToList<Vector2>();
-		visualPath.Points = PathtoPlayer.ToArray();
+		//visualPath.Points = PathtoPlayer.ToArray();
 
 
 		if(turnCounter != MoveTurn)
@@ -66,6 +103,7 @@ public partial class Enemy : CharacterBody2D
 				if (goToPos.X < GlobalPosition.X)
 				{
 					animatedSprite.Play("idle_left");
+					
 				}
 				else if (goToPos.X > GlobalPosition.X)
 				{
@@ -79,18 +117,23 @@ public partial class Enemy : CharacterBody2D
 				{
 					animatedSprite.Play("idle_down");
 				}
+				else
+				{
+					animatedSprite.Play("idle_down");
+				}
 
-
+				if (goToPos != player.GlobalPosition)
+				{
 					GlobalPosition = goToPos;
+				}
+				else
+				{
 
-				visualPath.Points = PathtoPlayer.ToArray();
+				}
+				//visualPath.Points = PathtoPlayer.ToArray();
 
-				turnCounter = 1;
+					turnCounter = 1;
 
-
-			}
-			else //Action to hit the player
-			{
 
 			}
 		}

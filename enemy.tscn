@@ -281,12 +281,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
 size = Vector2(16, 16)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animatedSprite") groups=["enemies"]]
 script = ExtResource("1_4gyqm")
+animatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5tv8x")
 animation = &"idle_left"
+frame_progress = 0.87563
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7k104")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 24)
