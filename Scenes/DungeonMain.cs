@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Threading.Tasks;
 
 public partial class DungeonMain : Node
 {
@@ -18,7 +19,29 @@ public partial class DungeonMain : Node
 	AStarGrid2D pathFinder = new AStarGrid2D();
 
 	[Export]
+	public RichTextLabel label {  get; set; }
+
+	[Export]
+	public Label HP {  get; set; }
+	[Export]
+	public Label floor {  get; set; }
+
+	[Export]
+	public Label GAMEOVERTXT { get; set; }
+	[Export] 
+	public ColorRect GAMEOVERCOL { get; set; }
+
+	[Export]
 	public PackedScene Mob1 {  get; set; }
+	[Export]
+	public Button strButton { get; set; }
+	[Export]
+	public Label introLBL { get; set; }
+
+	private CharacterBody2D mob3 {  get; set; }
+
+	[Export]
+	public Enemy mob2 { get; set; }
 
 	[Export]
 	public AnimatedSprite2D enemySprite;
@@ -28,27 +51,71 @@ public partial class DungeonMain : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
-		Mob1 = GD.Load<PackedScene>("res://Enemy.tscn");
-
+		GAMEOVERCOL.Visible = false;
+		GAMEOVERTXT.Visible = false;
 		_characterBody2D = GetNode<CharacterBody2D>("Character");
+		_inputs = (Dictionary<string, Vector2>)_characterBody2D.Get("inputs");
 
+		
 
-		_characterBody2D.Connect("PlayerAction", new Callable(this, nameof(MobSpawn)));
+		mob3 = GetNode<CharacterBody2D>("Enemy");
 
-		_characterBody2D.Connect("PlayerAttack", new Callable(this, nameof(CalcAttack)));
-
-		_inputs = (Dictionary<string,Vector2>)_characterBody2D.Get("inputs");
 
 		_floor = GetNode<TileMapLayer>("Dungeon/Floor");
 		_wall = GetNode<TileMapLayer>("Dungeon/Wall");
-
+		Mob1 = GD.Load<PackedScene>("res://Enemy.tscn");
 		
+		_characterBody2D.Visible = false;
+		_floor.Visible = false;
+		_wall.Visible = false;
+
+
+
+		_characterBody2D.Connect(CharacterCore.SignalName.PlayerAction, new Callable(this, nameof(MobSpawn)));
+		_characterBody2D.Connect(CharacterCore.SignalName.PlayerAttack, new Callable(this, nameof(CalcPlayerAttack)));
+		_characterBody2D.Connect(CharacterCore.SignalName.PlayerFailedAttack, new Callable(this, nameof(FailedAttack)));
+		mob3.Connect(Enemy.SignalName.EnemyHitYOU, new Callable(this, nameof(EnemyAttack)));
+		_characterBody2D.Connect(CharacterCore.SignalName.PlayerDied, new Callable(this, nameof(GameOver)));	
+	}
+
+	public void GameOver()
+	{
+		_characterBody2D.Visible = false;
+		_floor.Visible = false;
+		_wall.Visible = false;
+		GAMEOVERCOL.Visible = true;
+		GAMEOVERTXT.Visible = true;
+
+		strButton.Visible = true;
+		introLBL.Visible = true;
+	}
+	public void NewGame()
+	{
+		_characterBody2D.Position = new Vector2(120, 120);
+		_characterBody2D.Position = _characterBody2D.Position.Snapped(Vector2.One * (int)_characterBody2D.Get("tile_size"));
+		_characterBody2D.Position += Vector2.One * (int)_characterBody2D.Get("tile_size") / 2;
+
+		GetTree().CallGroup("enemies", Node.MethodName.QueueFree);
+		_wall._Ready();
+		_characterBody2D.Set(CharacterCore.PropertyName.curHP,_characterBody2D.Get(CharacterCore.PropertyName.baseHP));
+		GAMEOVERCOL.Visible = false;
+		GAMEOVERTXT.Visible = false;
+		strButton.Visible = false;
+		introLBL.Visible =  false;
+		label.Text = $"Floor {floornum}";
+		floor.Text = $"{floornum}F";
+
+		HP.Text = (string)_characterBody2D.Get(CharacterCore.PropertyName.curHP);
 
 		pathFinder.Region = _wall.GetUsedRect();
 		pathFinder.CellSize = new Vector2(24, 24);
 		pathFinder.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Never;
 		pathFinder.Update();
+
+		_characterBody2D.Visible = true;
+		_floor.Visible = true;
+		_wall.Visible = true;
+
 
 	}
 
@@ -58,12 +125,6 @@ public partial class DungeonMain : Node
 		{
 			if (@event.IsActionPressed(input))
 			{
-				//Mob Spawning
-
-
-				
-
-
 
 				bool onStairsChk = (bool)_characterBody2D.Call("OnStairs", _characterBody2D.Position);
 				if (onStairsChk)
@@ -76,8 +137,10 @@ public partial class DungeonMain : Node
 
 					GetTree().CallGroup("enemies", Node.MethodName.QueueFree); 
 					_wall._Ready();
-					
-					
+
+					floornum++;
+					label.AddText($"\nFloor {floornum}");
+					floor.Text = $"{floornum}F";
 
 				}
 			}
@@ -85,7 +148,28 @@ public partial class DungeonMain : Node
 		
 	}
 
-	public bool CalcAttack()
+	public void FailedAttack()
+	{
+		label.AddText($"\nThe Attack Failed!");
+	}
+
+	public bool EnemyAttack()
+	{
+		GD.Print("Get hit idiot");
+		if ((bool)_characterBody2D.Call(CharacterCore.MethodName.GetHitIdiot, [new Enemy(),floornum])){
+			//YOU DIE
+			GetTree().CallGroup("enemies", Node.MethodName.QueueFree);
+
+			GAMEOVERCOL.Visible = true;
+			GAMEOVERTXT.Visible = true;
+
+			GameOver();
+		}
+		HP.Text = (string)_characterBody2D.Get(CharacterCore.PropertyName.curHP);
+		return false;
+	}
+
+	public bool CalcPlayerAttack()
 	{
 
 		Vector2 playerPos = _characterBody2D.Position;
@@ -104,7 +188,14 @@ public partial class DungeonMain : Node
 
 		foreach(Enemy enemy in hitList)
 		{
-			enemy.Call("GetHitIdiot");
+			label.AddText($"\nEris hit nearby enemies for {_characterBody2D.Get("baseATK")} damage!");
+			if ((bool)enemy.Call("GetHitIdiot"))
+			{
+				_characterBody2D.Set(CharacterCore.PropertyName.curHP, (int)_characterBody2D.Get(CharacterCore.PropertyName.curHP) + 50);
+
+				label.AddText($"\nAn Enemy was defeated!");
+			}
+			
 		}
 
 		return false;
@@ -112,7 +203,6 @@ public partial class DungeonMain : Node
 
 	public bool MobSpawn()
 	{
-		
 
 		Random rand = new Random();
 
@@ -151,25 +241,29 @@ public partial class DungeonMain : Node
 		}
 		else
 		{
-			GD.Print(spawnPer);
 			if(rand.Next(100) < spawnPer)
 			{
 
-				Enemy eny = Mob1.Instantiate<Enemy>();
+				
+				Enemy eny = (Enemy)mob3.Duplicate();
+				eny.Set(Enemy.PropertyName.baseHP, (eny.baseHP + ((floornum-1) * 5 )));
+				eny.Set(Enemy.PropertyName.baseDEF, eny.baseDEF + ((floornum-1) * 5));
+
 				eny.GlobalPosition = spawn * 24;
 				eny.Set("tileMapLayer", _wall);
 				eny.Set("player", _characterBody2D);
 				eny.Set("animatedSprite", enemySprite);
 
 				eny.AddToGroup("enemies");
+				eny.Visible = true;
 				AddChild(eny);
 
 				
-				spawnPer = basePer;
+				spawnPer = basePer + (floornum * 3);
 			}
 			else
 			{
-				spawnPer += rand.Next(10);
+				spawnPer += rand.Next(10) + (floornum-1);
 			}
 		}
 
@@ -181,7 +275,7 @@ public partial class DungeonMain : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
+		HP.Text = (string)_characterBody2D.Get(CharacterCore.PropertyName.curHP);
 
 
 

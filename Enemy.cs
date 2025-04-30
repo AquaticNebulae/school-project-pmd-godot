@@ -32,6 +32,9 @@ public partial class Enemy : CharacterBody2D
 	List<Vector2> PathtoPlayer;
 	int turnCounter = 1;
 
+	[Signal]
+	public delegate void EnemyHitYOUEventHandler();
+
 	public Enemy()
 	{
 
@@ -67,7 +70,7 @@ public partial class Enemy : CharacterBody2D
 		_moveAi();
 	}
 
-	private void GetHitIdiot()
+	private bool GetHitIdiot()
 	{
 		int damage = ((int)player.Get("baseATK") - baseDEF);
 		GD.Print(damage);
@@ -78,16 +81,20 @@ public partial class Enemy : CharacterBody2D
 			if(baseHP < 0)
 			{
 				this.QueueFree();
+				return true;
 			}
 		}
+		return false;
 	}
+
+	
 
 	private void _moveAi()
 	{
 		PathtoPlayer = pathFinder.GetPointPath((Vector2I) GlobalPosition / tileSize, (Vector2I) player.GlobalPosition / tileSize).ToList<Vector2>();
 		//visualPath.Points = PathtoPlayer.ToArray();
 
-
+		
 		if(turnCounter != MoveTurn)
 		{
 			turnCounter++;
@@ -128,13 +135,17 @@ public partial class Enemy : CharacterBody2D
 				}
 				else
 				{
-
+					EmitSignal(SignalName.EnemyHitYOU);
 				}
 				//visualPath.Points = PathtoPlayer.ToArray();
 
 					turnCounter = 1;
 
 
+			}
+			else
+			{
+				
 			}
 		}
 

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\ctjac\\Documents\\pmd-godot\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\scenes\\dungeonmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:scenes\\dungeonmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\tileset\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:tileset\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\scenes\\dungeonmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|solutionrelative:scenes\\dungeonmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D45DCEFC-9F9B-4EEB-B8FB-A2C4078275E5}|PMD-Godot.csproj|c:\\users\\ctjac\\documents\\pmd-godot\\floor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,43 +30,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Enemy.cs",
-              "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Enemy.cs",
-              "RelativeDocumentMoniker": "Enemy.cs",
-              "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Enemy.cs",
-              "RelativeToolTip": "Enemy.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T15:47:52.216Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Wall.cs",
               "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Tileset\\Wall.cs",
               "RelativeDocumentMoniker": "Tileset\\Wall.cs",
               "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Tileset\\Wall.cs",
               "RelativeToolTip": "Tileset\\Wall.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwA0AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-26T15:04:32.959Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "DungeonMain.cs",
               "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\DungeonMain.cs",
               "RelativeDocumentMoniker": "Scenes\\DungeonMain.cs",
               "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\DungeonMain.cs",
               "RelativeToolTip": "Scenes\\DungeonMain.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwCQAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-26T15:02:41.501Z",
               "EditorCaption": ""
@@ -81,19 +68,54 @@
               "RelativeToolTip": "Floor.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAQwCsAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T21:43:10.199Z"
+              "WhenOpened": "2025-04-22T21:43:10.199Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CharacterCore.cs",
               "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\Characters\\CharacterCore.cs",
               "RelativeDocumentMoniker": "Scenes\\Characters\\CharacterCore.cs",
               "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Scenes\\Characters\\CharacterCore.cs",
               "RelativeToolTip": "Scenes\\Characters\\CharacterCore.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-21T15:58:56.051Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "e90797f4-9317-4d55-adf5-38a7db1e5c90",
+        "Display": 0,
+        "X": 81,
+        "Y": 80,
+        "Width": 908,
+        "Height": 718,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Enemy.cs",
+              "DocumentMoniker": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Enemy.cs",
+              "RelativeDocumentMoniker": "Enemy.cs",
+              "ToolTip": "C:\\Users\\ctjac\\Documents\\pmd-godot\\Enemy.cs",
+              "RelativeToolTip": "Enemy.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAmwDUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T15:47:52.216Z",
               "EditorCaption": ""
             }
           ]

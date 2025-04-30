@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://d0pbthmkojd4m"]
+[gd_scene load_steps=44 format=3 uid="uid://d0pbthmkojd4m"]
 
 [ext_resource type="Script" uid="uid://dcjnw2w8sdj5r" path="res://Scenes/DungeonMain.cs" id="1_cnowq"]
 [ext_resource type="PackedScene" uid="uid://wahibi3sxhqj" path="res://Tileset/GenerationTest.tscn" id="2_y3u3u"]
 [ext_resource type="PackedScene" uid="uid://dn2thw31npxij" path="res://Scenes/Characters/characterCore.tscn" id="3_cnowq"]
 [ext_resource type="PackedScene" uid="uid://tnybwgl3fu83" path="res://enemy.tscn" id="4_0ntt6"]
 [ext_resource type="Texture2D" uid="uid://iiye3n18sdkw" path="res://Sprites/Default(MissingNo)/Idle-Anim.png" id="5_wd2db"]
+[ext_resource type="PackedScene" uid="uid://b2fy8w1vye1qe" path="res://DungeonHUD.tscn" id="6_4qb6f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4gyqm"]
 atlas = ExtResource("5_wd2db")
@@ -281,18 +282,33 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="DungeonMain" type="Node" node_paths=PackedStringArray("enemySprite")]
+[node name="DungeonMain" type="Node" node_paths=PackedStringArray("label", "HP", "floor", "GAMEOVERTXT", "GAMEOVERCOL", "strButton", "introLBL", "mob2", "enemySprite")]
 script = ExtResource("1_cnowq")
+label = NodePath("DungeonHUD/TextBox/InteractionChat")
+HP = NodePath("DungeonHUD/PlayerStat/CurHP")
+floor = NodePath("DungeonHUD/PlayerStat/Floor")
+GAMEOVERTXT = NodePath("DungeonHUD/GAMEOVER/GAMEOVER")
+GAMEOVERCOL = NodePath("DungeonHUD/GAMEOVER/ColorRect")
 Mob1 = ExtResource("4_0ntt6")
+strButton = NodePath("DungeonHUD/Intro/StartButton")
+introLBL = NodePath("DungeonHUD/Intro/IntroSTR")
+mob2 = NodePath("Enemy")
 enemySprite = NodePath("EnemySprite")
 
 [node name="Dungeon" parent="." instance=ExtResource("2_y3u3u")]
 
 [node name="Character" parent="." node_paths=PackedStringArray("floorData") instance=ExtResource("3_cnowq")]
 position = Vector2(120, 120)
+baseHP = 10
 floorData = NodePath("../Dungeon/Floor")
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("tileMapLayer", "player", "visualPath") instance=ExtResource("4_0ntt6")]
+visible = false
+tileMapLayer = NodePath("../Dungeon/Wall")
+player = NodePath("../Character")
+visualPath = NodePath("../Line2D")
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -303,5 +319,30 @@ sprite_frames = SubResource("SpriteFrames_4qb6f")
 animation = &"idle_down"
 autoplay = "idle_down"
 
+[node name="DungeonHUD" parent="." instance=ExtResource("6_4qb6f")]
+
+[node name="ColorRect2" parent="DungeonHUD/PlayerStat" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="MaxHP" parent="DungeonHUD/PlayerStat" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="CurHP" parent="DungeonHUD/PlayerStat" index="2"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Floor" parent="DungeonHUD/PlayerStat" index="3"]
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" parent="DungeonHUD/TextBox" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="InteractionChat" parent="DungeonHUD/TextBox" index="1"]
+offset_left = -1.0
+offset_right = 498.0
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="DungeonHUD/Intro/StartButton" to="." method="NewGame"]
+
 [editable path="Dungeon"]
 [editable path="Character"]
+[editable path="DungeonHUD"]

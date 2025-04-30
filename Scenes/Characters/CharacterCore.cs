@@ -16,6 +16,7 @@ public partial class CharacterCore : CharacterBody2D
 	[Export]
 	public int baseDEF = 10;
 
+	public int curHP = 100;
 
 	[Export]
 	public RayCast2D rayCast;
@@ -32,10 +33,17 @@ public partial class CharacterCore : CharacterBody2D
 	[Signal]
 	public delegate void PlayerAttackEventHandler();
 
+	[Signal]
+	public delegate void PlayerFailedAttackEventHandler();
+
+	[Signal]
+	public delegate void PlayerDiedEventHandler();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
+		curHP = baseHP;
+
 		animatedSprite.Play("idle_down");
 
 		inputs.Add("move_right", Vector2.Right);
@@ -48,19 +56,59 @@ public partial class CharacterCore : CharacterBody2D
 
 	}
 
+	private bool GetHitIdiot(Enemy theHitter, int floornum)
+	{
+		int damage = ((int)theHitter.Get("baseATK") - baseDEF);
+		GD.Print(damage);
+		if (damage > 0)
+		{
+
+			baseHP -= damage;
+			if (baseHP < 0)
+			{
+				//Gameover Idiot
+				this.QueueFree();
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		foreach (var input in inputs.Keys)
 		{
 			if(@event.IsActionPressed(input)){
 				move(input);
-				EmitSignal(SignalName.PlayerAction);
+				curHP--;
+				if (curHP <= 0)
+				{
+					EmitSignal(SignalName.PlayerDied);
+					
+				}
+				else
+				{
+					EmitSignal(SignalName.PlayerAction);
+
+				}
+					
 			}
 		}
 		if (@event.IsActionPressed("active_action"))
 		{
 			Attack();
-			EmitSignal(SignalName.PlayerAction);
+			curHP--;
+			if (curHP <= 0)
+			{
+				EmitSignal(SignalName.PlayerDied);
+			}
+
+			else
+			{
+				EmitSignal(SignalName.PlayerAction);
+			}
+
 		}
 
 	}
@@ -69,6 +117,8 @@ public partial class CharacterCore : CharacterBody2D
 	{
 		if (!rayCast.IsColliding())
 		{
+			EmitSignal(SignalName.PlayerFailedAttack);
+
 			GD.Print("The Attack Failed!");
 		}
 		else
