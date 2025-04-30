@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d0pbthmkojd4m"]
+[gd_scene load_steps=45 format=3 uid="uid://d0pbthmkojd4m"]
 
 [ext_resource type="Script" uid="uid://dcjnw2w8sdj5r" path="res://Scenes/DungeonMain.cs" id="1_cnowq"]
 [ext_resource type="PackedScene" uid="uid://wahibi3sxhqj" path="res://Tileset/GenerationTest.tscn" id="2_y3u3u"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://tnybwgl3fu83" path="res://enemy.tscn" id="4_0ntt6"]
 [ext_resource type="Texture2D" uid="uid://iiye3n18sdkw" path="res://Sprites/Default(MissingNo)/Idle-Anim.png" id="5_wd2db"]
 [ext_resource type="PackedScene" uid="uid://b2fy8w1vye1qe" path="res://DungeonHUD.tscn" id="6_4qb6f"]
+[ext_resource type="AudioStream" uid="uid://d228r430cnt00" path="res://BeachCave.mp3" id="7_sdff1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4gyqm"]
 atlas = ExtResource("5_wd2db")
@@ -299,7 +300,6 @@ enemySprite = NodePath("EnemySprite")
 
 [node name="Character" parent="." node_paths=PackedStringArray("floorData") instance=ExtResource("3_cnowq")]
 position = Vector2(120, 120)
-baseHP = 10
 floorData = NodePath("../Dungeon/Floor")
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
@@ -340,6 +340,9 @@ metadata/_edit_use_anchors_ = true
 offset_left = -1.0
 offset_right = 498.0
 metadata/_edit_use_anchors_ = true
+
+[node name="DungeonOST" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_sdff1")
 
 [connection signal="pressed" from="DungeonHUD/Intro/StartButton" to="." method="NewGame"]
 

@@ -42,7 +42,9 @@ public partial class DungeonMain : Node
 
 	[Export]
 	public Enemy mob2 { get; set; }
-
+	
+	private AudioStreamPlayer dungOST;
+	
 	[Export]
 	public AnimatedSprite2D enemySprite;
 
@@ -51,6 +53,8 @@ public partial class DungeonMain : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		dungOST = GetNode<AudioStreamPlayer>("DungeonOST");
+		dungOST.Stop();
 		GAMEOVERCOL.Visible = false;
 		GAMEOVERTXT.Visible = false;
 		_characterBody2D = GetNode<CharacterBody2D>("Character");
@@ -80,6 +84,7 @@ public partial class DungeonMain : Node
 
 	public void GameOver()
 	{
+		dungOST.Stop();
 		_characterBody2D.Visible = false;
 		_floor.Visible = false;
 		_wall.Visible = false;
@@ -91,6 +96,7 @@ public partial class DungeonMain : Node
 	}
 	public void NewGame()
 	{
+		dungOST.Play();
 		_characterBody2D.Position = new Vector2(120, 120);
 		_characterBody2D.Position = _characterBody2D.Position.Snapped(Vector2.One * (int)_characterBody2D.Get("tile_size"));
 		_characterBody2D.Position += Vector2.One * (int)_characterBody2D.Get("tile_size") / 2;
